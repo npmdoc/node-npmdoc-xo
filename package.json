@@ -1,17 +1,40 @@
 {
-    "buildNpmdoc":"xo",
+    "author": "kai zhu <kaizhu256@gmail.com>",
+    "buildNpmdoc": "xo",
+    "description": "api documentation for [xo (v0.18.1)](https://github.com/sindresorhus/xo#readme) [![npm package](https://img.shields.io/npm/v/npmdoc-xo.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-xo) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-xo.svg)](https://travis-ci.org/npmdoc/node-npmdoc-xo)",
     "devDependencies": {
-        "xo": "*",
         "electron-lite": "kaizhu256/node-electron-lite#alpha",
-        "utility2": "kaizhu256/node-utility2#alpha"
+        "utility2": "kaizhu256/node-utility2#alpha",
+        "xo": "*"
     },
-    "name":"npmdoc-xo",
+    "engines": {
+        "node": ">=4.0"
+    },
+    "homepage": "https://github.com/npmdoc/node-npmdoc-xo",
+    "keywords": [
+        "documentation",
+        "xo"
+    ],
+    "license": "MIT",
+    "main": "lib.npmdoc_xo.js",
+    "name": "npmdoc-xo",
+    "nameAlias": "npmdoc_xo",
+    "nameOriginal": "npmdoc-xo",
+    "os": [
+        "darwin",
+        "linux"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/npmdoc/node-npmdoc-xo"
     },
     "scripts": {
-        "build-ci": "utility2 shReadmeTest build_ci.sh"
+        "build-ci": "utility2 shReadmeTest build_ci.sh",
+        "env": "env",
+        "heroku-postbuild": "(set -e; npm install \"kaizhu256/node-utility2#alpha\"; utility2 shDeployHeroku)",
+        "postinstall": "if [ -f npm_scripts.sh ]; then ./npm_scripts.sh postinstall; fi",
+        "start": "(set -e; export PORT=${PORT:-8080}; utility2 start test.js)",
+        "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
     },
     "version": "0.0.1"
 }
