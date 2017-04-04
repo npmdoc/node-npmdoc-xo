@@ -1,0 +1,869 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/sindresorhus/xo#readme">xo (v0.18.1)</a>
+</h1>
+<h4>JavaScript happiness style linter â¤ï¸</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xo">module xo</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.getErrorResults">
+            function <span class="apidocSignatureSpan">xo.</span>getErrorResults
+            <span class="apidocSignatureSpan">(results)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.getFormatter">
+            function <span class="apidocSignatureSpan">xo.</span>getFormatter
+            <span class="apidocSignatureSpan">(format)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.lintFiles">
+            function <span class="apidocSignatureSpan">xo.</span>lintFiles
+            <span class="apidocSignatureSpan">(patterns, opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.lintText">
+            function <span class="apidocSignatureSpan">xo.</span>lintText
+            <span class="apidocSignatureSpan">(str, opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.outputFixes">
+            function <span class="apidocSignatureSpan">xo.</span>outputFixes
+            <span class="apidocSignatureSpan">(report)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xo.</span>options_manager</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xo.options_manager">module xo.options_manager</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.options_manager.buildConfig">
+            function <span class="apidocSignatureSpan">xo.options_manager.</span>buildConfig
+            <span class="apidocSignatureSpan">( emptyOptions()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.options_manager.emptyOptions">
+            function <span class="apidocSignatureSpan">xo.options_manager.</span>emptyOptions
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.options_manager.findApplicableOverrides">
+            function <span class="apidocSignatureSpan">xo.options_manager.</span>findApplicableOverrides
+            <span class="apidocSignatureSpan">(path, overrides)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.options_manager.getGitIgnores">
+            function <span class="apidocSignatureSpan">xo.options_manager.</span>getGitIgnores
+            <span class="apidocSignatureSpan">('**/.gitignore', { ignore: opts.ignores || [], cwd: opts.cwd || process.cwd()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.options_manager.getIgnores">
+            function <span class="apidocSignatureSpan">xo.options_manager.</span>getIgnores
+            <span class="apidocSignatureSpan">(opts.ignores || [])</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.options_manager.groupConfigs">
+            function <span class="apidocSignatureSpan">xo.options_manager.</span>groupConfigs
+            <span class="apidocSignatureSpan">(paths, baseOptions, overrides)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.options_manager.mergeApplicableOverrides">
+            function <span class="apidocSignatureSpan">xo.options_manager.</span>mergeApplicableOverrides
+            <span class="apidocSignatureSpan">(baseOptions, applicableOverrides)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.options_manager.mergeWithPkgConf">
+            function <span class="apidocSignatureSpan">xo.options_manager.</span>mergeWithPkgConf
+            <span class="apidocSignatureSpan">({cwd: process.cwd()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.options_manager.normalizeOpts">
+            function <span class="apidocSignatureSpan">xo.options_manager.</span>normalizeOpts
+            <span class="apidocSignatureSpan">({}, opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.options_manager.preprocess">
+            function <span class="apidocSignatureSpan">xo.options_manager.</span>preprocess
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xo.options_manager.</span>DEFAULT_CONFIG</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xo.options_manager.</span>DEFAULT_IGNORE</span>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xo" id="apidoc.module.xo">module xo</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xo.getErrorResults" id="apidoc.element.xo.getErrorResults">
+        function <span class="apidocSignatureSpan">xo.</span>getErrorResults
+        <span class="apidocSignatureSpan">(results)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getErrorResults = function (results) {
+    const filtered = [];
+
+    results.forEach(result =&gt; {
+        const filteredMessages = result.messages.filter(isErrorMessage);
+
+        if (filteredMessages.length &gt; 0) {
+            filtered.push(
+                Object.assign(result, {
+                    messages: filteredMessages,
+                    errorCount: filteredMessages.length,
+                    warningCount: 0
+                })
+            );
+        }
+    });
+
+    return filtered;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+	const engine = new eslint.CLIEngine(config);
+	const report = engine.executeOnFiles(paths, config);
+
+	return processReport(report, opts);
+}
+
+function processReport(report, opts) {
+	report.results = opts.quiet ? eslint.CLIEngine.<span class="apidocCodeKeywordSpan">getErrorResults</span>(report.results) : report
+.results;
+	return report;
+}
+
+exports.getFormatter = eslint.CLIEngine.getFormatter;
+exports.getErrorResults = eslint.CLIEngine.getErrorResults;
+exports.outputFixes = eslint.CLIEngine.outputFixes;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.getFormatter" id="apidoc.element.xo.getFormatter">
+        function <span class="apidocSignatureSpan">xo.</span>getFormatter
+        <span class="apidocSignatureSpan">(format)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getFormatter = function (format) {
+
+    let formatterPath;
+
+    // default is stylish
+    format = format || "stylish";
+
+    // only strings are valid formatters
+    if (typeof format === "string") {
+
+        // replace \ with / for Windows compatibility
+        format = format.replace(/\\/g, "/");
+
+        // if there's a slash, then it's a file
+        if (format.indexOf("/") &gt; -1) {
+            const cwd = this.options ? this.options.cwd : process.cwd();
+
+            formatterPath = path.resolve(cwd, format);
+        } else {
+            formatterPath = `./formatters/${format}`;
+        }
+
+        try {
+            return require(formatterPath);
+        } catch (ex) {
+            ex.message = `There was a problem loading formatter: ${formatterPath}\nError: ${ex.message}`;
+            throw ex;
+        }
+
+    } else {
+        return null;
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.lintFiles" id="apidoc.element.xo.lintFiles">
+        function <span class="apidocSignatureSpan">xo.</span>lintFiles
+        <span class="apidocSignatureSpan">(patterns, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">(patterns, opts) =&gt; {
+	opts = optionsManager.preprocess(opts);
+	patterns = patterns.length === 0 ? ['**/*'] : arrify(patterns);
+
+	const gitIgnores = optionsManager.getGitIgnores(opts);
+	const glob = patterns.concat(gitIgnores);
+
+	return globby(glob, {ignore: opts.ignores, nodir: true}).then(paths =&gt; {
+		// Filter out unwanted file extensions
+		// for silly users that don't specify an extension in the glob pattern
+		paths = paths.filter(x =&gt; {
+			// Remove dot before the actual extension
+			const ext = path.extname(x).replace('.', '');
+			return opts.extensions.indexOf(ext) !== -1;
+		});
+
+		if (!(opts.overrides &amp;&amp; opts.overrides.length &gt; 0)) {
+			return runEslint(paths, opts);
+		}
+
+		const overrides = opts.overrides;
+		delete opts.overrides;
+
+		const grouped = optionsManager.groupConfigs(paths, opts, overrides);
+
+		return mergeReports(grouped.map(data =&gt; runEslint(data.paths, data.opts)));
+	});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.lintText" id="apidoc.element.xo.lintText">
+        function <span class="apidocSignatureSpan">xo.</span>lintText
+        <span class="apidocSignatureSpan">(str, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">(str, opts) =&gt; {
+	opts = optionsManager.preprocess(opts);
+
+	if (opts.overrides &amp;&amp; opts.overrides.length &gt; 0) {
+		const overrides = opts.overrides;
+		delete opts.overrides;
+
+		const filename = path.relative(opts.cwd, opts.filename);
+
+		const foundOverrides = optionsManager.findApplicableOverrides(filename, overrides);
+		opts = optionsManager.mergeApplicableOverrides(opts, foundOverrides.applicable);
+	}
+
+	opts = optionsManager.buildConfig(opts);
+	const defaultIgnores = optionsManager.getIgnores({}).ignores;
+
+	if (opts.ignores &amp;&amp; !isEqual(defaultIgnores, opts.ignores) &amp;&amp; typeof opts.filename !== 'string') {
+		throw new Error('The `ignores` option requires the `filename` option to be defined.');
+	}
+
+	if (opts.filename) {
+		const filename = path.relative(opts.cwd, opts.filename);
+		const gitIgnores = optionsManager.getGitIgnores(opts);
+		const glob = [filename].concat(gitIgnores);
+
+		if (multimatch(glob, opts.ignores).length &gt; 0) {
+			return {
+				errorCount: 0,
+				warningCount: 0,
+				results: [{
+					errorCount: 0,
+					filePath: filename,
+					messages: [],
+					warningCount: 0
+				}]
+			};
+		}
+	}
+
+	const engine = new eslint.CLIEngine(opts);
+	const report = engine.executeOnText(str, opts.filename);
+
+	return processReport(report, opts);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.outputFixes" id="apidoc.element.xo.outputFixes">
+        function <span class="apidocSignatureSpan">xo.</span>outputFixes
+        <span class="apidocSignatureSpan">(report)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">outputFixes = function (report) {
+    report.results.filter(result =&gt; result.hasOwnProperty("output")).forEach(result =&gt; {
+        fs.writeFileSync(result.filePath, result.output);
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xo.options_manager" id="apidoc.module.xo.options_manager">module xo.options_manager</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xo.options_manager.buildConfig" id="apidoc.element.xo.options_manager.buildConfig">
+        function <span class="apidocSignatureSpan">xo.options_manager.</span>buildConfig
+        <span class="apidocSignatureSpan">( emptyOptions()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">opts =&gt; {
+	const config = deepAssign( emptyOptions(),
+		DEFAULT_CONFIG,
+		opts
+	);
+
+	if (opts.space) {
+		const spaces = typeof opts.space === 'number' ? opts.space : 2;
+		config.rules.indent = ['error', spaces, {SwitchCase: 1}];
+
+		// Only apply if the user has the React plugin
+		if (opts.cwd &amp;&amp; resolveFrom(opts.cwd, 'eslint-plugin-react')) {
+			config.plugins = config.plugins.concat('react');
+			config.rules['react/jsx-indent-props'] = ['error', spaces];
+			config.rules['react/jsx-indent'] = ['error', spaces];
+		}
+	}
+
+	if (opts.semicolon === false) {
+		config.rules.semi = ['error', 'never'];
+		config.rules['semi-spacing'] = ['error', {
+			before: false,
+			after: true
+		}];
+	}
+
+	if (opts.esnext !== false) {
+		config.baseConfig.extends = ['xo/esnext', path.join(__dirname, 'config/plugins.js')];
+	}
+
+	if (opts.rules) {
+		Object.assign(config.rules, opts.rules);
+	}
+
+	if (opts.settings) {
+		config.baseConfig.settings = opts.settings;
+	}
+
+	if (opts.parser) {
+		config.baseConfig.parser = opts.parser;
+	}
+
+	if (opts.extends &amp;&amp; opts.extends.length &gt; 0) {
+		// TODO: this logic needs to be improved, preferably use the same code as ESLint
+		// user's configs must be resolved to their absolute paths
+		const configs = opts.extends.map(name =&gt; {
+			// Don't do anything if it's a filepath
+			if (pathExists.sync(name)) {
+				return name;
+			}
+
+			// Don't do anything if it's a config from a plugin
+			if (name.startsWith('plugin:')) {
+				return name;
+			}
+
+			if (!name.includes('eslint-config-')) {
+				name = `eslint-config-${name}`;
+			}
+
+			const ret = resolveFrom(opts.cwd, name);
+
+			if (!ret) {
+				throw new Error(`Couldn't find ESLint config: ${name}`);
+			}
+
+			return ret;
+		});
+
+		config.baseConfig.extends = config.baseConfig.extends.concat(configs);
+	}
+
+	return config;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+		const filename = path.relative(opts.cwd, opts.filename);
+
+		const foundOverrides = optionsManager.findApplicableOverrides(filename, overrides);
+		opts = optionsManager.mergeApplicableOverrides(opts, foundOverrides.applicable);
+	}
+
+	opts = optionsManager.<span class="apidocCodeKeywordSpan">buildConfig</span>(opts);
+	const defaultIgnores = optionsManager.getIgnores({}).ignores;
+
+	if (opts.ignores &amp;&amp; !isEqual(defaultIgnores, opts.ignores) &amp;&amp; typeof opts.filename !== 'string') {
+		throw new Error('The `ignores` option requires the `filename` option to be defined.');
+	}
+
+	if (opts.filename) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.options_manager.emptyOptions" id="apidoc.element.xo.options_manager.emptyOptions">
+        function <span class="apidocSignatureSpan">xo.options_manager.</span>emptyOptions
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">() =&gt; ({
+	rules: {},
+	settings: {},
+	globals: [],
+	envs: [],
+	plugins: [],
+	extends: []
+})</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.options_manager.findApplicableOverrides" id="apidoc.element.xo.options_manager.findApplicableOverrides">
+        function <span class="apidocSignatureSpan">xo.options_manager.</span>findApplicableOverrides
+        <span class="apidocSignatureSpan">(path, overrides)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">(path, overrides) =&gt; {
+	let hash = 0;
+	const applicable = [];
+
+	overrides.forEach(override =&gt; {
+		hash &lt;&lt;= 1;
+
+		if (multimatch(path, override.files).length &gt; 0) {
+			applicable.push(override);
+			hash |= 1;
+		}
+	});
+
+	return {
+		hash,
+		applicable
+	};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+	if (opts.overrides &amp;&amp; opts.overrides.length &gt; 0) {
+		const overrides = opts.overrides;
+		delete opts.overrides;
+
+		const filename = path.relative(opts.cwd, opts.filename);
+
+		const foundOverrides = optionsManager.<span class="apidocCodeKeywordSpan">findApplicableOverrides</span>(filename, overrides);
+		opts = optionsManager.mergeApplicableOverrides(opts, foundOverrides.applicable);
+	}
+
+	opts = optionsManager.buildConfig(opts);
+	const defaultIgnores = optionsManager.getIgnores({}).ignores;
+
+	if (opts.ignores &amp;&amp; !isEqual(defaultIgnores, opts.ignores) &amp;&amp; typeof opts.filename !== 'string') {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.options_manager.getGitIgnores" id="apidoc.element.xo.options_manager.getGitIgnores">
+        function <span class="apidocSignatureSpan">xo.options_manager.</span>getGitIgnores
+        <span class="apidocSignatureSpan">('**/.gitignore', { ignore: opts.ignores || [], cwd: opts.cwd || process.cwd()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">opts =&gt; globby
+	.sync('**/.gitignore', { ignore: opts.ignores || [], cwd: opts.cwd || process.cwd()
+	})
+	.map(pathToGitignore =&gt; {
+		const patterns = parseGitignore(pathToGitignore);
+		const base = path.dirname(pathToGitignore);
+
+		return patterns
+			.map(pattern =&gt; {
+				const negate = !pattern.startsWith('!');
+				const patternPath = negate ? pattern : pattern.substr(1);
+				return {negate, pattern: path.join(base, patternPath)};
+			})
+			.sort(pattern =&gt; pattern.negate ? 1 : -1)
+			.map(item =&gt; item.negate ? `!${item.pattern}` : item.pattern);
+	})
+	.reduce((a, b) =&gt; a.concat(b), [])</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+	if (opts.ignores &amp;&amp; !isEqual(defaultIgnores, opts.ignores) &amp;&amp; typeof opts.filename !== 'string') {
+		throw new Error('The `ignores` option requires the `filename` option to be defined.');
+	}
+
+	if (opts.filename) {
+		const filename = path.relative(opts.cwd, opts.filename);
+		const gitIgnores = optionsManager.<span class="apidocCodeKeywordSpan">getGitIgnores</span>(opts);
+		const glob = [filename].concat(gitIgnores);
+
+		if (multimatch(glob, opts.ignores).length &gt; 0) {
+			return {
+				errorCount: 0,
+				warningCount: 0,
+				results: [{
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.options_manager.getIgnores" id="apidoc.element.xo.options_manager.getIgnores">
+        function <span class="apidocSignatureSpan">xo.options_manager.</span>getIgnores
+        <span class="apidocSignatureSpan">(opts.ignores || [])</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">opts =&gt; {
+	opts.ignores = DEFAULT_IGNORE.concat(opts.ignores || []);
+	return opts;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		const filename = path.relative(opts.cwd, opts.filename);
+
+		const foundOverrides = optionsManager.findApplicableOverrides(filename, overrides);
+		opts = optionsManager.mergeApplicableOverrides(opts, foundOverrides.applicable);
+	}
+
+	opts = optionsManager.buildConfig(opts);
+	const defaultIgnores = optionsManager.<span class="apidocCodeKeywordSpan">getIgnores</span>({}).ignores;
+
+	if (opts.ignores &amp;&amp; !isEqual(defaultIgnores, opts.ignores) &amp;&amp; typeof opts.filename !== 'string') {
+		throw new Error('The `ignores` option requires the `filename` option to be defined.');
+	}
+
+	if (opts.filename) {
+		const filename = path.relative(opts.cwd, opts.filename);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.options_manager.groupConfigs" id="apidoc.element.xo.options_manager.groupConfigs">
+        function <span class="apidocSignatureSpan">xo.options_manager.</span>groupConfigs
+        <span class="apidocSignatureSpan">(paths, baseOptions, overrides)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">(paths, baseOptions, overrides) =&gt; {
+	const map = {};
+	const arr = [];
+
+	paths.forEach(x =&gt; {
+		const data = findApplicableOverrides(x, overrides);
+
+		if (!map[data.hash]) {
+			const mergedOpts = mergeApplicableOverrides(baseOptions, data.applicable);
+			delete mergedOpts.files;
+
+			arr.push(map[data.hash] = {
+				opts: mergedOpts,
+				paths: []
+			});
+		}
+
+		map[data.hash].paths.push(x);
+	});
+
+	return arr;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		if (!(opts.overrides &amp;&amp; opts.overrides.length &gt; 0)) {
+			return runEslint(paths, opts);
+		}
+
+		const overrides = opts.overrides;
+		delete opts.overrides;
+
+		const grouped = optionsManager.<span class="apidocCodeKeywordSpan">groupConfigs</span>(paths, opts, overrides);
+
+		return mergeReports(grouped.map(data =&gt; runEslint(data.paths, data.opts)));
+	});
+};
+
+function mergeReports(reports) {
+	// Merge multiple reports into a single report
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.options_manager.mergeApplicableOverrides" id="apidoc.element.xo.options_manager.mergeApplicableOverrides">
+        function <span class="apidocSignatureSpan">xo.options_manager.</span>mergeApplicableOverrides
+        <span class="apidocSignatureSpan">(baseOptions, applicableOverrides)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">(baseOptions, applicableOverrides) =&gt; {
+	applicableOverrides = applicableOverrides.map(normalizeOpts);
+	const overrides = [emptyOptions(), baseOptions].concat(applicableOverrides);
+	return deepAssign.apply(null, overrides);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+	if (opts.overrides &amp;&amp; opts.overrides.length &gt; 0) {
+		const overrides = opts.overrides;
+		delete opts.overrides;
+
+		const filename = path.relative(opts.cwd, opts.filename);
+
+		const foundOverrides = optionsManager.findApplicableOverrides(filename, overrides);
+		opts = optionsManager.<span class="apidocCodeKeywordSpan">mergeApplicableOverrides</span>(opts, foundOverrides.applicable);
+	}
+
+	opts = optionsManager.buildConfig(opts);
+	const defaultIgnores = optionsManager.getIgnores({}).ignores;
+
+	if (opts.ignores &amp;&amp; !isEqual(defaultIgnores, opts.ignores) &amp;&amp; typeof opts.filename !== 'string') {
+		throw new Error('The `ignores` option requires the `filename` option to be defined.');
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.options_manager.mergeWithPkgConf" id="apidoc.element.xo.options_manager.mergeWithPkgConf">
+        function <span class="apidocSignatureSpan">xo.options_manager.</span>mergeWithPkgConf
+        <span class="apidocSignatureSpan">({cwd: process.cwd()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">opts =&gt; {
+	opts = Object.assign({cwd: process.cwd()}, opts);
+	const conf = pkgConf.sync('xo', {cwd: opts.cwd, skipOnFalse: true});
+	return Object.assign({}, conf, opts);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.options_manager.normalizeOpts" id="apidoc.element.xo.options_manager.normalizeOpts">
+        function <span class="apidocSignatureSpan">xo.options_manager.</span>normalizeOpts
+        <span class="apidocSignatureSpan">({}, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">opts =&gt; {
+	opts = Object.assign({}, opts);
+
+	// Alias to help humans
+	[
+		'env',
+		'global',
+		'ignore',
+		'plugin',
+		'rule',
+		'setting',
+		'extend',
+		'extension'
+	].forEach(singular =&gt; {
+		const plural = singular + 's';
+		let value = opts[plural] || opts[singular];
+
+		delete opts[singular];
+
+		if (value === undefined) {
+			return;
+		}
+
+		if (singular !== 'rule' &amp;&amp; singular !== 'setting') {
+			value = arrify(value);
+		}
+
+		opts[plural] = value;
+	});
+
+	return opts;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.options_manager.preprocess" id="apidoc.element.xo.options_manager.preprocess">
+        function <span class="apidocSignatureSpan">xo.options_manager.</span>preprocess
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">opts =&gt; {
+	opts = mergeWithPkgConf(opts);
+	opts = normalizeOpts(opts);
+	opts = getIgnores(opts);
+	opts.extensions = DEFAULT_EXTENSION.concat(opts.extensions || []);
+
+	return opts;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+const globby = require('globby');
+const isEqual = require('lodash.isequal');
+const multimatch = require('multimatch');
+const arrify = require('arrify');
+const optionsManager = require('./options-manager');
+
+exports.lintText = (str, opts) =&gt; {
+	opts = optionsManager.<span class="apidocCodeKeywordSpan">preprocess</span>(opts);
+
+	if (opts.overrides &amp;&amp; opts.overrides.length &gt; 0) {
+		const overrides = opts.overrides;
+		delete opts.overrides;
+
+		const filename = path.relative(opts.cwd, opts.filename);
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>

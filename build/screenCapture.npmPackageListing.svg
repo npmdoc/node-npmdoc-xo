@@ -1,0 +1,14 @@
+<svg height="174" width="720" xmlns="http://www.w3.org/2000/svg">
+<rect height="174" fill="#555" width="720"></rect>
+<text fill="#7f7" font-family="Courier New" font-size="12" xml:space="preserve">
+<tspan x="10" y="26">  0.  2017-04-04 18:40:35 +0000    34502 byte  .</tspan>
+<tspan x="10" y="42">  1.  2017-04-04 18:40:35 +0000     4386 byte  cli.js</tspan>
+<tspan x="10" y="58">  2.  2017-04-04 18:40:35 +0000       64 byte  config/overrides.js</tspan>
+<tspan x="10" y="74">  3.  2017-04-04 18:40:35 +0000     1850 byte  config/plugins.js</tspan>
+<tspan x="10" y="90">  4.  2017-04-04 18:40:35 +0000     3396 byte  index.js</tspan>
+<tspan x="10" y="106">  5.  2017-04-04 18:40:35 +0000     1119 byte  license</tspan>
+<tspan x="10" y="122">  6.  2017-04-04 18:40:35 +0000     6442 byte  options-manager.js</tspan>
+<tspan x="10" y="138">  7.  2017-04-04 18:40:35 +0000     3907 byte  package.json</tspan>
+<tspan x="10" y="154">  8.  2017-04-04 18:40:35 +0000    13338 byte  readme.md</tspan>
+</text>
+</svg>
