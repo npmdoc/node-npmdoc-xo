@@ -107,6 +107,58 @@
 
     </ol></li>
 
+    <li class="apidocModuleLi"><a href="#apidoc.module.xo.getErrorResults">module xo.getErrorResults</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.getErrorResults.getErrorResults">
+            function <span class="apidocSignatureSpan">xo.</span>getErrorResults
+            <span class="apidocSignatureSpan">(results)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xo.getFormatter">module xo.getFormatter</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.getFormatter.getFormatter">
+            function <span class="apidocSignatureSpan">xo.</span>getFormatter
+            <span class="apidocSignatureSpan">(format)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xo.lintFiles">module xo.lintFiles</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.lintFiles.lintFiles">
+            function <span class="apidocSignatureSpan">xo.</span>lintFiles
+            <span class="apidocSignatureSpan">(patterns, opts)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xo.lintText">module xo.lintText</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.lintText.lintText">
+            function <span class="apidocSignatureSpan">xo.</span>lintText
+            <span class="apidocSignatureSpan">(str, opts)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
     <li class="apidocModuleLi"><a href="#apidoc.module.xo.options_manager">module xo.options_manager</a><ol>
 
         <li>
@@ -208,6 +260,19 @@
         <li>
 
             <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xo.options_manager.</span>DEFAULT_IGNORE</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.xo.outputFixes">module xo.outputFixes</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.xo.outputFixes.outputFixes">
+            function <span class="apidocSignatureSpan">xo.</span>outputFixes
+            <span class="apidocSignatureSpan">(report)</span>
+            </a>
 
         </li>
 
@@ -423,6 +488,214 @@ exports.outputFixes = eslint.CLIEngine.outputFixes;
     </ul>
 
 
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xo.getErrorResults" id="apidoc.module.xo.getErrorResults">module xo.getErrorResults</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xo.getErrorResults.getErrorResults" id="apidoc.element.xo.getErrorResults.getErrorResults">
+        function <span class="apidocSignatureSpan">xo.</span>getErrorResults
+        <span class="apidocSignatureSpan">(results)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getErrorResults = function (results) {
+    const filtered = [];
+
+    results.forEach(result =&gt; {
+        const filteredMessages = result.messages.filter(isErrorMessage);
+
+        if (filteredMessages.length &gt; 0) {
+            filtered.push(
+                Object.assign(result, {
+                    messages: filteredMessages,
+                    errorCount: filteredMessages.length,
+                    warningCount: 0
+                })
+            );
+        }
+    });
+
+    return filtered;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+	const engine = new eslint.CLIEngine(config);
+	const report = engine.executeOnFiles(paths, config);
+
+	return processReport(report, opts);
+}
+
+function processReport(report, opts) {
+	report.results = opts.quiet ? eslint.CLIEngine.<span class="apidocCodeKeywordSpan">getErrorResults</span>(report.results) : report
+.results;
+	return report;
+}
+
+exports.getFormatter = eslint.CLIEngine.getFormatter;
+exports.getErrorResults = eslint.CLIEngine.getErrorResults;
+exports.outputFixes = eslint.CLIEngine.outputFixes;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xo.getFormatter" id="apidoc.module.xo.getFormatter">module xo.getFormatter</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xo.getFormatter.getFormatter" id="apidoc.element.xo.getFormatter.getFormatter">
+        function <span class="apidocSignatureSpan">xo.</span>getFormatter
+        <span class="apidocSignatureSpan">(format)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getFormatter = function (format) {
+
+    let formatterPath;
+
+    // default is stylish
+    format = format || "stylish";
+
+    // only strings are valid formatters
+    if (typeof format === "string") {
+
+        // replace \ with / for Windows compatibility
+        format = format.replace(/\\/g, "/");
+
+        // if there's a slash, then it's a file
+        if (format.indexOf("/") &gt; -1) {
+            const cwd = this.options ? this.options.cwd : process.cwd();
+
+            formatterPath = path.resolve(cwd, format);
+        } else {
+            formatterPath = `./formatters/${format}`;
+        }
+
+        try {
+            return require(formatterPath);
+        } catch (ex) {
+            ex.message = `There was a problem loading formatter: ${formatterPath}\nError: ${ex.message}`;
+            throw ex;
+        }
+
+    } else {
+        return null;
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xo.lintFiles" id="apidoc.module.xo.lintFiles">module xo.lintFiles</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xo.lintFiles.lintFiles" id="apidoc.element.xo.lintFiles.lintFiles">
+        function <span class="apidocSignatureSpan">xo.</span>lintFiles
+        <span class="apidocSignatureSpan">(patterns, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">(patterns, opts) =&gt; {
+	opts = optionsManager.preprocess(opts);
+	patterns = patterns.length === 0 ? ['**/*'] : arrify(patterns);
+
+	const gitIgnores = optionsManager.getGitIgnores(opts);
+	const glob = patterns.concat(gitIgnores);
+
+	return globby(glob, {ignore: opts.ignores, nodir: true}).then(paths =&gt; {
+		// Filter out unwanted file extensions
+		// for silly users that don't specify an extension in the glob pattern
+		paths = paths.filter(x =&gt; {
+			// Remove dot before the actual extension
+			const ext = path.extname(x).replace('.', '');
+			return opts.extensions.indexOf(ext) !== -1;
+		});
+
+		if (!(opts.overrides &amp;&amp; opts.overrides.length &gt; 0)) {
+			return runEslint(paths, opts);
+		}
+
+		const overrides = opts.overrides;
+		delete opts.overrides;
+
+		const grouped = optionsManager.groupConfigs(paths, opts, overrides);
+
+		return mergeReports(grouped.map(data =&gt; runEslint(data.paths, data.opts)));
+	});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xo.lintText" id="apidoc.module.xo.lintText">module xo.lintText</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xo.lintText.lintText" id="apidoc.element.xo.lintText.lintText">
+        function <span class="apidocSignatureSpan">xo.</span>lintText
+        <span class="apidocSignatureSpan">(str, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">(str, opts) =&gt; {
+	opts = optionsManager.preprocess(opts);
+
+	if (opts.overrides &amp;&amp; opts.overrides.length &gt; 0) {
+		const overrides = opts.overrides;
+		delete opts.overrides;
+
+		const filename = path.relative(opts.cwd, opts.filename);
+
+		const foundOverrides = optionsManager.findApplicableOverrides(filename, overrides);
+		opts = optionsManager.mergeApplicableOverrides(opts, foundOverrides.applicable);
+	}
+
+	opts = optionsManager.buildConfig(opts);
+	const defaultIgnores = optionsManager.getIgnores({}).ignores;
+
+	if (opts.ignores &amp;&amp; !isEqual(defaultIgnores, opts.ignores) &amp;&amp; typeof opts.filename !== 'string') {
+		throw new Error('The `ignores` option requires the `filename` option to be defined.');
+	}
+
+	if (opts.filename) {
+		const filename = path.relative(opts.cwd, opts.filename);
+		const gitIgnores = optionsManager.getGitIgnores(opts);
+		const glob = [filename].concat(gitIgnores);
+
+		if (multimatch(glob, opts.ignores).length &gt; 0) {
+			return {
+				errorCount: 0,
+				warningCount: 0,
+				results: [{
+					errorCount: 0,
+					filePath: filename,
+					messages: [],
+					warningCount: 0
+				}]
+			};
+		}
+	}
+
+	const engine = new eslint.CLIEngine(opts);
+	const report = engine.executeOnText(str, opts.filename);
+
+	return processReport(report, opts);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
 
 
 </div>
@@ -856,6 +1129,28 @@ exports.lintText = (str, opts) =&gt; {
 
 
 
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.xo.outputFixes" id="apidoc.module.xo.outputFixes">module xo.outputFixes</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.xo.outputFixes.outputFixes" id="apidoc.element.xo.outputFixes.outputFixes">
+        function <span class="apidocSignatureSpan">xo.</span>outputFixes
+        <span class="apidocSignatureSpan">(report)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">outputFixes = function (report) {
+    report.results.filter(result =&gt; result.hasOwnProperty("output")).forEach(result =&gt; {
+        fs.writeFileSync(result.filePath, result.output);
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
 
 
 </div>
