@@ -101,58 +101,61 @@
 
         <li>
 
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xo.</span>index</span>
+
+        </li>
+
+        <li>
+
             <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">xo.</span>options_manager</span>
 
         </li>
 
     </ol></li>
 
-    <li class="apidocModuleLi"><a href="#apidoc.module.xo.getErrorResults">module xo.getErrorResults</a><ol>
+    <li class="apidocModuleLi"><a href="#apidoc.module.xo.index">module xo.index</a><ol>
 
         <li>
 
-            <a class="apidocElementLiA" href="#apidoc.element.xo.getErrorResults.getErrorResults">
-            function <span class="apidocSignatureSpan">xo.</span>getErrorResults
+            <a class="apidocElementLiA" href="#apidoc.element.xo.index.getErrorResults">
+            function <span class="apidocSignatureSpan">xo.index.</span>getErrorResults
             <span class="apidocSignatureSpan">(results)</span>
             </a>
 
         </li>
 
-    </ol></li>
-
-    <li class="apidocModuleLi"><a href="#apidoc.module.xo.getFormatter">module xo.getFormatter</a><ol>
-
         <li>
 
-            <a class="apidocElementLiA" href="#apidoc.element.xo.getFormatter.getFormatter">
-            function <span class="apidocSignatureSpan">xo.</span>getFormatter
+            <a class="apidocElementLiA" href="#apidoc.element.xo.index.getFormatter">
+            function <span class="apidocSignatureSpan">xo.index.</span>getFormatter
             <span class="apidocSignatureSpan">(format)</span>
             </a>
 
         </li>
 
-    </ol></li>
-
-    <li class="apidocModuleLi"><a href="#apidoc.module.xo.lintFiles">module xo.lintFiles</a><ol>
-
         <li>
 
-            <a class="apidocElementLiA" href="#apidoc.element.xo.lintFiles.lintFiles">
-            function <span class="apidocSignatureSpan">xo.</span>lintFiles
+            <a class="apidocElementLiA" href="#apidoc.element.xo.index.lintFiles">
+            function <span class="apidocSignatureSpan">xo.index.</span>lintFiles
             <span class="apidocSignatureSpan">(patterns, opts)</span>
             </a>
 
         </li>
 
-    </ol></li>
+        <li>
 
-    <li class="apidocModuleLi"><a href="#apidoc.module.xo.lintText">module xo.lintText</a><ol>
+            <a class="apidocElementLiA" href="#apidoc.element.xo.index.lintText">
+            function <span class="apidocSignatureSpan">xo.index.</span>lintText
+            <span class="apidocSignatureSpan">(str, opts)</span>
+            </a>
+
+        </li>
 
         <li>
 
-            <a class="apidocElementLiA" href="#apidoc.element.xo.lintText.lintText">
-            function <span class="apidocSignatureSpan">xo.</span>lintText
-            <span class="apidocSignatureSpan">(str, opts)</span>
+            <a class="apidocElementLiA" href="#apidoc.element.xo.index.outputFixes">
+            function <span class="apidocSignatureSpan">xo.index.</span>outputFixes
+            <span class="apidocSignatureSpan">(report)</span>
             </a>
 
         </li>
@@ -265,19 +268,6 @@
 
     </ol></li>
 
-    <li class="apidocModuleLi"><a href="#apidoc.module.xo.outputFixes">module xo.outputFixes</a><ol>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.xo.outputFixes.outputFixes">
-            function <span class="apidocSignatureSpan">xo.</span>outputFixes
-            <span class="apidocSignatureSpan">(report)</span>
-            </a>
-
-        </li>
-
-    </ol></li>
-
 </ol></div>
 
 <div class="apidocSectionDiv">
@@ -371,7 +361,23 @@ exports.outputFixes = eslint.CLIEngine.outputFixes;
         return null;
     }
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+const log = report =&gt; {
+	// legacy
+	// TODO: remove in 1.0.0
+	if (opts.compact) {
+		opts.reporter = 'compact';
+	}
+
+	const reporter = opts.reporter ? xo.<span class="apidocCodeKeywordSpan">getFormatter</span>(opts.reporter) : formatterPretty;
+
+	process.stdout.write(reporter(report.results));
+	process.exit(report.errorCount === 0 ? 0 : 1);
+}
+
+const open = report =&gt; {
+	if (report.errorCount === 0) {
+...</pre></li>
     </ul>
 
 
@@ -411,7 +417,23 @@ exports.outputFixes = eslint.CLIEngine.outputFixes;
 		return mergeReports(grouped.map(data =&gt; runEslint(data.paths, data.opts)));
 	});
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+			console.error('The `open` option is not supported on stdin');
+			process.exit(1);
+		}
+
+		log(xo.lintText(str, opts));
+	});
+} else {
+	xo.<span class="apidocCodeKeywordSpan">lintFiles</span>(input, opts).then(report =&gt; {
+		if (opts.fix) {
+			xo.outputFixes(report);
+		}
+
+		if (opts.open) {
+			open(report);
+		}
+...</pre></li>
     </ul>
 
 
@@ -467,7 +489,23 @@ exports.outputFixes = eslint.CLIEngine.outputFixes;
 
 	return processReport(report, opts);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+
+if (opts.init) {
+	require('xo-init')();
+} else if (opts.stdin) {
+	getStdin().then(str =&gt; {
+		if (opts.fix) {
+			console.log(xo.<span class="apidocCodeKeywordSpan">lintText</span>(str, opts).results[0].output);
+			return;
+		}
+
+		if (opts.open) {
+			console.error('The `open` option is not supported on stdin');
+			process.exit(1);
+		}
+...</pre></li>
     </ul>
 
 
@@ -484,8 +522,26 @@ exports.outputFixes = eslint.CLIEngine.outputFixes;
         fs.writeFileSync(result.filePath, result.output);
     });
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		}
+
+		log(xo.lintText(str, opts));
+	});
+} else {
+	xo.lintFiles(input, opts).then(report =&gt; {
+		if (opts.fix) {
+			xo.<span class="apidocCodeKeywordSpan">outputFixes</span>(report);
+		}
+
+		if (opts.open) {
+			open(report);
+		}
+
+		log(report);
+...</pre></li>
     </ul>
+
+
 
 
 
@@ -493,12 +549,12 @@ exports.outputFixes = eslint.CLIEngine.outputFixes;
 </div>
 
 <div class="apidocSectionDiv">
-<h1><a href="#apidoc.module.xo.getErrorResults" id="apidoc.module.xo.getErrorResults">module xo.getErrorResults</a></h1>
+<h1><a href="#apidoc.module.xo.index" id="apidoc.module.xo.index">module xo.index</a></h1>
 
 
     <h2>
-        <a href="#apidoc.element.xo.getErrorResults.getErrorResults" id="apidoc.element.xo.getErrorResults.getErrorResults">
-        function <span class="apidocSignatureSpan">xo.</span>getErrorResults
+        <a href="#apidoc.element.xo.index.getErrorResults" id="apidoc.element.xo.index.getErrorResults">
+        function <span class="apidocSignatureSpan">xo.index.</span>getErrorResults
         <span class="apidocSignatureSpan">(results)</span>
         </a>
     </h2>
@@ -542,15 +598,10 @@ exports.outputFixes = eslint.CLIEngine.outputFixes;
     </ul>
 
 
-</div>
-
-<div class="apidocSectionDiv">
-<h1><a href="#apidoc.module.xo.getFormatter" id="apidoc.module.xo.getFormatter">module xo.getFormatter</a></h1>
-
 
     <h2>
-        <a href="#apidoc.element.xo.getFormatter.getFormatter" id="apidoc.element.xo.getFormatter.getFormatter">
-        function <span class="apidocSignatureSpan">xo.</span>getFormatter
+        <a href="#apidoc.element.xo.index.getFormatter" id="apidoc.element.xo.index.getFormatter">
+        function <span class="apidocSignatureSpan">xo.index.</span>getFormatter
         <span class="apidocSignatureSpan">(format)</span>
         </a>
     </h2>
@@ -588,19 +639,30 @@ exports.outputFixes = eslint.CLIEngine.outputFixes;
         return null;
     }
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+const log = report =&gt; {
+	// legacy
+	// TODO: remove in 1.0.0
+	if (opts.compact) {
+		opts.reporter = 'compact';
+	}
+
+	const reporter = opts.reporter ? xo.<span class="apidocCodeKeywordSpan">getFormatter</span>(opts.reporter) : formatterPretty;
+
+	process.stdout.write(reporter(report.results));
+	process.exit(report.errorCount === 0 ? 0 : 1);
+}
+
+const open = report =&gt; {
+	if (report.errorCount === 0) {
+...</pre></li>
     </ul>
 
 
-</div>
-
-<div class="apidocSectionDiv">
-<h1><a href="#apidoc.module.xo.lintFiles" id="apidoc.module.xo.lintFiles">module xo.lintFiles</a></h1>
-
 
     <h2>
-        <a href="#apidoc.element.xo.lintFiles.lintFiles" id="apidoc.element.xo.lintFiles.lintFiles">
-        function <span class="apidocSignatureSpan">xo.</span>lintFiles
+        <a href="#apidoc.element.xo.index.lintFiles" id="apidoc.element.xo.index.lintFiles">
+        function <span class="apidocSignatureSpan">xo.index.</span>lintFiles
         <span class="apidocSignatureSpan">(patterns, opts)</span>
         </a>
     </h2>
@@ -633,19 +695,30 @@ exports.outputFixes = eslint.CLIEngine.outputFixes;
 		return mergeReports(grouped.map(data =&gt; runEslint(data.paths, data.opts)));
 	});
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+			console.error('The `open` option is not supported on stdin');
+			process.exit(1);
+		}
+
+		log(xo.lintText(str, opts));
+	});
+} else {
+	xo.<span class="apidocCodeKeywordSpan">lintFiles</span>(input, opts).then(report =&gt; {
+		if (opts.fix) {
+			xo.outputFixes(report);
+		}
+
+		if (opts.open) {
+			open(report);
+		}
+...</pre></li>
     </ul>
 
 
-</div>
-
-<div class="apidocSectionDiv">
-<h1><a href="#apidoc.module.xo.lintText" id="apidoc.module.xo.lintText">module xo.lintText</a></h1>
-
 
     <h2>
-        <a href="#apidoc.element.xo.lintText.lintText" id="apidoc.element.xo.lintText.lintText">
-        function <span class="apidocSignatureSpan">xo.</span>lintText
+        <a href="#apidoc.element.xo.index.lintText" id="apidoc.element.xo.index.lintText">
+        function <span class="apidocSignatureSpan">xo.index.</span>lintText
         <span class="apidocSignatureSpan">(str, opts)</span>
         </a>
     </h2>
@@ -694,7 +767,56 @@ exports.outputFixes = eslint.CLIEngine.outputFixes;
 
 	return processReport(report, opts);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+
+if (opts.init) {
+	require('xo-init')();
+} else if (opts.stdin) {
+	getStdin().then(str =&gt; {
+		if (opts.fix) {
+			console.log(xo.<span class="apidocCodeKeywordSpan">lintText</span>(str, opts).results[0].output);
+			return;
+		}
+
+		if (opts.open) {
+			console.error('The `open` option is not supported on stdin');
+			process.exit(1);
+		}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.xo.index.outputFixes" id="apidoc.element.xo.index.outputFixes">
+        function <span class="apidocSignatureSpan">xo.index.</span>outputFixes
+        <span class="apidocSignatureSpan">(report)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">outputFixes = function (report) {
+    report.results.filter(result =&gt; result.hasOwnProperty("output")).forEach(result =&gt; {
+        fs.writeFileSync(result.filePath, result.output);
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		}
+
+		log(xo.lintText(str, opts));
+	});
+} else {
+	xo.lintFiles(input, opts).then(report =&gt; {
+		if (opts.fix) {
+			xo.<span class="apidocCodeKeywordSpan">outputFixes</span>(report);
+		}
+
+		if (opts.open) {
+			open(report);
+		}
+
+		log(report);
+...</pre></li>
     </ul>
 
 
@@ -1129,28 +1251,6 @@ exports.lintText = (str, opts) =&gt; {
 
 
 
-
-
-</div>
-
-<div class="apidocSectionDiv">
-<h1><a href="#apidoc.module.xo.outputFixes" id="apidoc.module.xo.outputFixes">module xo.outputFixes</a></h1>
-
-
-    <h2>
-        <a href="#apidoc.element.xo.outputFixes.outputFixes" id="apidoc.element.xo.outputFixes.outputFixes">
-        function <span class="apidocSignatureSpan">xo.</span>outputFixes
-        <span class="apidocSignatureSpan">(report)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">outputFixes = function (report) {
-    report.results.filter(result =&gt; result.hasOwnProperty("output")).forEach(result =&gt; {
-        fs.writeFileSync(result.filePath, result.output);
-    });
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
-    </ul>
 
 
 </div>
