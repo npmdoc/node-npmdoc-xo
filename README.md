@@ -1,6 +1,6 @@
 # npmdoc-xo
 
-#### api documentation for  [xo (v0.18.1)](https://github.com/sindresorhus/xo#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-xo.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-xo) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-xo.svg)](https://travis-ci.org/npmdoc/node-npmdoc-xo)
+#### basic api documentation for  [xo (v0.18.1)](https://github.com/sindresorhus/xo#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-xo.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-xo) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-xo.svg)](https://travis-ci.org/npmdoc/node-npmdoc-xo)
 
 #### JavaScript happiness style linter ❤️
 
